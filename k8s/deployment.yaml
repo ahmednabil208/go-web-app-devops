@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+# the kind of the object we are creating is a deployment
+kind: Deployment
+metadata:
+  # the name of the deployment
+  name: go-web-app
+# the specification of the pods we want to create
+spec: 
+  # the number of replicas to run (1 for a simple app)
+  replicas: 1
+  # The selector used to identify the pods that are part of this replicaset
+  selector:
+    matchLabels:
+      # the replicas will identify the pods that are part of this replicaset if they have the labels app: go-web-app
+      app: go-web-app
+  # the pod template that we want to use
+  template:
+    metadata:
+      labels:
+        app: go-web-app
+    spec:
+      containers:
+        # the name of the container
+        - name: go-web-app
+          # The image created locally using the Dockerfile
+          image: go-web-app-img
+          # the port we want to expose
+          ports:
+          - containerPort: 8080

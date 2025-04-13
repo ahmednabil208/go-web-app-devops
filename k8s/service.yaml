@@ -1,0 +1,18 @@
+apiVersion: v1
+# the kind of the object we are creating is a Service
+kind: Service
+metadata:
+  # the name of the service
+  name: go-web-app
+spec:
+  # Selector to match the target pods for this service
+  selector:
+    app: go-web-app
+  ports:
+    - protocol: TCP
+      # service port
+      port: 8080
+      # pod port
+      targetPort: 9376
+# the type of the service (ClusterIP allows internal communication within the cluster)
+type: ClusterIP
